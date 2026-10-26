@@ -1,0 +1,12 @@
+Guildwake
+Copyright 2026 gdragon-git
+
+Licensed under the Apache License, Version 2.0.
+
+This project integrates with independently installed Discord, AMP, OpenSSH,
+systemd and Python. It does not distribute AMP or game binaries, license keys,
+game saves, deployment credentials or private administrative evidence.
+
+Third-party dependency license and notice texts are retained under
+THIRD_PARTY_LICENSES. Those components retain their own copyright and terms.
+No endorsement by Discord, CubeCoders or the game developers is implied.

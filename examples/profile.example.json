@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "discord": {
+    "owner": "100000000000000001",
+    "guild": "100000000000000002",
+    "channel": "100000000000000003",
+    "application": "100000000000000004",
+    "role": "100000000000000005"
+  },
+  "host": {
+    "name": "gameserver",
+    "ipv4": "192.0.2.10",
+    "mac": "02:00:00:00:00:10",
+    "broadcast": "192.0.2.255"
+  },
+  "amp": {
+    "origin": "http://127.0.0.1:8080",
+    "username": "discord-amp",
+    "selected": "Enshrouded01",
+    "management": "ADS01",
+    "inventory": "/var/lib/amp/instances.json",
+    "instances": [
+      {
+        "name": "ADS01",
+        "id": "22222222-2222-4222-8222-222222222222",
+        "path": "/var/lib/amp/instances/ADS01"
+      },
+      {
+        "name": "Enshrouded01",
+        "id": "11111111-1111-4111-8111-111111111111",
+        "path": "/srv/game-data/instances/Enshrouded01"
+      },
+      {
+        "name": "ARKSurvivalAscended01",
+        "id": "33333333-3333-4333-8333-333333333333",
+        "path": "/srv/game-data/instances/ARKSurvivalAscended01"
+      },
+      {
+        "name": "ZomboidLAN01",
+        "id": "44444444-4444-4444-8444-444444444444",
+        "path": "/srv/game-data/instances/ZomboidLAN01"
+      }
+    ]
+  },
+  "observer": {
+    "storage_mount": "/srv/game-data",
+    "storage_uuid": "55555555-5555-4555-8555-555555555555",
+    "amp_user": "amp",
+    "maintenance_exe": "/opt/cubecoders/amp/ampinstmgr",
+    "maintenance_alias": "/usr/bin/ampinstmgr",
+    "maintenance_unit": "/etc/systemd/system/amptasks.service",
+    "systemd_exe": "/usr/lib/systemd/systemd",
+    "amp_binary": "AMP_Linux_x86_64"
+  },
+  "query": {
+    "port": 15637
+  },
+  "broker": {
+    "port": 18081
+  }
+}

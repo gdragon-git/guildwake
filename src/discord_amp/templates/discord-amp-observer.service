@@ -1,0 +1,44 @@
+[Unit]
+Description=Read-only game process observer
+After=local-fs.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=exec
+User=root
+Group=discord-amp-broker
+ExecStart=/opt/discord-amp-controller/.venv/bin/python -B -m discord_amp.runtime observer
+RuntimeDirectory=discord-amp-observer
+RuntimeDirectoryMode=0750
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_DAC_READ_SEARCH CAP_SYS_PTRACE
+ProtectSystem=strict
+ProtectHome=read-only
+ReadOnlyPaths=/dev
+ReadWritePaths=/run/discord-amp-observer
+ProtectProc=default
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+SystemCallFilter=@system-service
+SystemCallFilter=~@mount @reboot @swap @module @raw-io @debug
+MemoryMax=128M
+TasksMax=16
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=10
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,46 @@
+[Unit]
+Description=Fixed Enshrouded AMP broker
+After=network-online.target discord-amp-observer.service
+Wants=network-online.target discord-amp-observer.service
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=exec
+User=discord-amp-broker
+Group=discord-amp-broker
+ExecStart=/opt/discord-amp-controller/.venv/bin/python -B -m discord_amp.runtime broker
+LoadCredential=amp-password:/etc/discord-amp-broker/credentials/amp-password
+LoadCredential=broker-token:/etc/discord-amp-broker/credentials/broker-token
+StateDirectory=discord-amp-broker
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectProc=invisible
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+IPAddressAllow=@@HOST_IPV4@@/32
+MemoryMax=192M
+TasksMax=32
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=10
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

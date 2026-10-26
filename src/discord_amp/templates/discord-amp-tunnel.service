@@ -1,0 +1,40 @@
+# Host-side SSH Match policy must be installed/qualified before starting this.
+[Unit]
+Description=Broker-only SSH transport
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=exec
+User=discord-amp-tunnel
+Group=discord-amp-controller
+LoadCredential=tunnel-key:/etc/discord-amp-tunnel/credentials/tunnel-key
+ExecStart=/usr/bin/ssh -F /dev/null -N -T -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 -o ExitOnForwardFailure=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o HostKeyAlias=@@HOST@@ -o UserKnownHostsFile=/etc/discord-amp-tunnel/known_hosts -o IdentitiesOnly=yes -o IdentityAgent=none -o PreferredAuthentications=publickey -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o ForwardAgent=no -o StreamLocalBindMask=0117 -o StreamLocalBindUnlink=yes -i %d/tunnel-key -L /run/discord-amp-tunnel/broker.sock:127.0.0.1:@@BROKER_PORT@@ discord-amp-tunnel@@@HOST_IPV4@@
+RuntimeDirectory=discord-amp-tunnel
+RuntimeDirectoryMode=0750
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectProc=invisible
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=@@HOST_IPV4@@/32
+MemoryMax=64M
+TasksMax=8
+# Bounded 10-second connection attempts, spaced by 15 seconds; transport-only
+# reconnect continues while the host sleeps. Never invokes WOL or AMP actions.
+Restart=always
+RestartSec=15
+TimeoutStopSec=10
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

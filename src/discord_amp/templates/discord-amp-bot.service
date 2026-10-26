@@ -1,0 +1,41 @@
+[Unit]
+Description=Private Discord game command Gateway
+After=network-online.target discord-amp-controller.service
+Wants=network-online.target discord-amp-controller.service
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=exec
+User=discord-amp-bot
+Group=discord-amp-bot
+SupplementaryGroups=discord-amp-controller
+ExecStart=/opt/discord-amp-controller/.venv/bin/python -B -m discord_amp.runtime bot
+LoadCredential=discord-token:/etc/discord-amp-bot/credentials/discord-token
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectProc=invisible
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryMax=192M
+TasksMax=32
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=10
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guildwake"
+version = "0.1.0a1"
+description = "Experimental role-based Discord wake and restricted AMP start controller"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES/**/*"]
+authors = [{name = "gdragon-git"}]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+]
+
+[project.optional-dependencies]
+discord = ["discord.py==2.7.1"]
+
+[project.scripts]
+guildwake = "discord_amp.runtime:main"
+discord-amp = "discord_amp.runtime:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+discord_amp = ["templates/*"]

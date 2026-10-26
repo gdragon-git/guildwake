@@ -1,0 +1,86 @@
+{
+  "artifact_platform": "Windows CPython 3.12, existing pinned environment",
+  "packages": [
+    {
+      "name": "aiohappyeyeballs",
+      "version": "2.7.1",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/aiohappyeyeballs/0-LICENSE"
+      ]
+    },
+    {
+      "name": "aiohttp",
+      "version": "3.14.5",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/aiohttp/0-LICENSE.txt",
+        "THIRD_PARTY_LICENSES/aiohttp/1-LICENSE"
+      ]
+    },
+    {
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/aiosignal/0-LICENSE"
+      ]
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/attrs/0-LICENSE"
+      ]
+    },
+    {
+      "name": "discord.py",
+      "version": "2.7.1",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/discord.py/0-LICENSE"
+      ]
+    },
+    {
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/frozenlist/0-LICENSE"
+      ]
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/idna/0-LICENSE.md"
+      ]
+    },
+    {
+      "name": "multidict",
+      "version": "7.1.0",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/multidict/0-LICENSE"
+      ]
+    },
+    {
+      "name": "propcache",
+      "version": "0.5.4",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/propcache/0-LICENSE",
+        "THIRD_PARTY_LICENSES/propcache/1-NOTICE"
+      ]
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/typing_extensions/0-LICENSE"
+      ]
+    },
+    {
+      "name": "yarl",
+      "version": "1.25.1",
+      "license_files": [
+        "THIRD_PARTY_LICENSES/yarl/0-LICENSE",
+        "THIRD_PARTY_LICENSES/yarl/1-NOTICE"
+      ]
+    }
+  ],
+  "other_platform_artifacts_reviewed": false
+}

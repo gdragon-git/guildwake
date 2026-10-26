@@ -1,0 +1,10 @@
+include README.md LICENSE NOTICE SECURITY.md CONTRIBUTING.md PROVENANCE.md THIRD_PARTY.md requirements-discord.lock
+include dependency-inventory.json
+recursive-include docs *.md
+recursive-include examples *.json
+recursive-include tests *.py
+recursive-include tools *.py
+recursive-include THIRD_PARTY_LICENSES *
+recursive-include .github *.yml
+recursive-include src/discord_amp/templates *
+global-exclude *.pyc
