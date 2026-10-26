@@ -15,7 +15,7 @@ from discord_amp.model import Request, Fault
 from profile_fixture import OWNER, GUILD, CHANNEL, APPLICATION
 from discord_amp.services import controller_handler,BrokerClient
 from discord_amp.store import Store
-from discord_amp.wire import rpc,serve_unix,close_writer
+from discord_amp.wire import rpc,serve_unix,close_writer,envelope
 
 def request(number=1,action='status'):
  return Request(str(900000000000001000+number),OWNER,GUILD,CHANNEL,APPLICATION,(),action,'enshrouded' if action=='start' else 'gameserver')
@@ -155,7 +155,7 @@ class NativeStatusTests(StatusRecoveryTests):
   try:
    reader,writer=await asyncio.open_unix_connection(self.rpc_path)
    import json
-   writer.write(json.dumps(self.message()).encode()+b'\n'); await writer.drain()
+   writer.write(json.dumps(envelope(self.message())).encode()+b'\n'); await writer.drain()
    # Ensure the request was accepted before dropping the caller.
    deadline=time.monotonic()+1
    while self.store.get(request().id) is None:

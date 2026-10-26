@@ -1,6 +1,7 @@
 name: Synthetic tests and package checks
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -8,6 +9,7 @@ permissions:
 jobs:
   local-fixtures:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         python: ['3.12', '3.13']

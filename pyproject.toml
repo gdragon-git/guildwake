@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "guildwake"
-version = "0.1.0a1"
+version = "0.1.0a2"
 description = "Experimental role-based Discord wake and restricted AMP start controller"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES/**/*"]

@@ -6,7 +6,7 @@ An always-on Pi or Linux machine lets a Discord role check a sleeping AMP host,
 wake it, and start Enshrouded through a restricted broker. The bot never receives
 general SSH or AMP administrator access.
 
-**Experimental source alpha — 0.1.0a1.** This configurable candidate has portable
+**Experimental source alpha â€” 0.1.0a2.** This configurable candidate has portable
 and synthetic local tests. Independent installation, Linux service deployment,
 ARM packaging and live wake/start of this exact candidate have **not** been
 qualified. Those checks are deferred. The original private implementation has
@@ -15,9 +15,9 @@ Review the setup and limits before operating it. No automatic installer is suppl
 
 | Command | Behavior |
 | --- | --- |
-| `/server status` → configured host | Private status; never wakes. |
-| `/server wake` → configured host | Wake if needed; verify authenticated AMP without starting a game. |
-| `/game start` → `enshrouded` | Wake if needed, start the allowed game once and check AMP/LAN readiness. |
+| `/server status` â†’ configured host | Private status; never wakes. |
+| `/server wake` â†’ configured host | Wake if needed; verify authenticated AMP without starting a game. |
+| `/game start` â†’ `enshrouded` | Wake if needed, start the allowed game once and check AMP/LAN readiness. |
 
 Members need the configured Discord role in the configured guild/channel.
 The owner retains a separate configured owner path. No named member/tester list.

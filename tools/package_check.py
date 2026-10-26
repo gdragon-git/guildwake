@@ -16,6 +16,15 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def source_files():
+    for directory, folders, files in os.walk(ROOT):
+        folders[:] = [name for name in folders if name not in {'.git', '.venv', '__pycache__', 'build', 'dist'}
+                      and not name.endswith('.egg-info')]
+        for name in files:
+            if not name.endswith('.pyc'):
+                yield Path(directory) / name
+
+
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -35,14 +44,14 @@ def main():
     if output.exists() or output.is_relative_to(ROOT):
         parser.exit(2, 'Use a new output directory outside the source tree.\n')
     output.mkdir(parents=True)
-    before = {p.relative_to(ROOT).as_posix(): digest(p) for p in ROOT.rglob('*') if p.is_file()}
+    before = {p.relative_to(ROOT).as_posix(): digest(p) for p in source_files()}
     log = io.StringIO()
     try:
         import setuptools.build_meta as backend
         with tempfile.TemporaryDirectory(prefix='guildwake-package-') as temporary:
             temp = Path(temporary)
             source = temp / 'source'
-            shutil.copytree(ROOT, source, ignore=shutil.ignore_patterns('.venv', '__pycache__', 'build', 'dist', '*.egg-info'))
+            shutil.copytree(ROOT, source, ignore=shutil.ignore_patterns('.git', '.venv', '__pycache__', 'build', 'dist', '*.egg-info'))
             previous = Path.cwd()
             try:
                 os.chdir(source)
@@ -80,7 +89,7 @@ def main():
                 value = json.loads(result.stdout)
                 assert value.get('mutations', 0) == 0 and value.get('network_probes', 0) == 0
                 smoke.append({'command': action, 'passed': True})
-        assert before == {p.relative_to(ROOT).as_posix(): digest(p) for p in ROOT.rglob('*') if p.is_file()}, 'source_changed'
+        assert before == {p.relative_to(ROOT).as_posix(): digest(p) for p in source_files()}, 'source_changed'
         report = {'passed': True, 'artifacts': {name: {'bytes': (output / name).stat().st_size,
             'sha256': digest(output / name)} for name in (wheel, sdist)},
             'cli_smoke': smoke, 'source_unchanged': True, 'downloads': 0,
